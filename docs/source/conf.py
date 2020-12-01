@@ -26,9 +26,11 @@ author = "Mikhail Akimov"
 
 # The full version, including alpha/beta/rc tags
 release = streamz_gcp_pubsub.__version__
+version = streamz_gcp_pubsub.__version__
 
 
 # -- General configuration ---------------------------------------------------
+master_doc = "index"
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
