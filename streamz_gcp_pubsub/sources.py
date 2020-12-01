@@ -9,6 +9,8 @@ def create_metadata(_id, ack):
 
 
 class from_gcp_pubsub(Source):
+    """Consume messages from a GCP PubSub subscription."""
+
     def __init__(
         self,
         subscription,
@@ -20,6 +22,39 @@ class from_gcp_pubsub(Source):
         service_account_json: str = None,
         **kwargs
     ):
+        """
+        Authentication built into Google Cloud python package is used. If
+        ``service_account_file`` is set, it will be used, otherwise
+        ``service_account_json``. If both are ``None``, the library will look up
+        service account file path in ``GOOGLE_APPLICATION_CREDENTIALS`` environment
+        variable.
+
+        Parameters
+        ----------
+        subscription: str
+            Subscription path in the format
+            ``projects/{project_name}/subscriptions/{subscription_name}``.
+        max_messages: int
+            Maximum number of messages that will be consumed at once. Defaults to 1000.
+        timeout: float
+            Number of seconds to wait for messages when none are available for the
+            subscription. Will emit an empty list of messages afterwards. When ``None``,
+            the source will block until there are messages to consume. Note that if you
+            call ``stop()``, the source will stop only after it stops waiting for
+            messages. Defaults to ``None``.
+        ensure_subscription: bool
+            Create subscription if it doesn't exist. If ``True``, then ``topic``
+            parameter is required. Defaults to ``False``.
+        topic: str
+            Topic path for creating a subscription. Required if
+            ``ensure_subscription=True``. Defaults to ``None``.
+        service_account_file: str
+            Path to a service account file used for authentication. Defaults to
+            ``None``.
+        service_account_json: str
+            String representation of JSON data in service account file used for
+            authentication. Defaults to ``None``.
+        """
         super().__init__(ensure_io_loop=True, **kwargs)
         self._subscription = subscription
         self._max_messages = max_messages

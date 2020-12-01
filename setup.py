@@ -4,10 +4,13 @@ from setuptools import setup
 setup(
     name="streamz_gcp_pubsub",
     version="0.1.0",
-    install_requires=["streamz", "google-cloud-pubsub"],
+    install_requires=[
+        "streamz @ git+https://github.com/python-streamz/streamz.git",
+        "google-cloud-pubsub",
+    ],
     extras_require={
         "dev": ["pytest", "black", "flake8"],
-        "docs": ["sphinx"],
+        "docs": ["sphinx", "sphinx_rtd_theme"],
     },
     entry_points={
         "streamz.sources": [

@@ -35,7 +35,7 @@ def test_ensure(clients, info):
     source = Stream.from_gcp_pubsub(
         sub_path, timeout=1, ensure_subscription=True, topic=topic
     )
-    L = source.sink_to_list()
+    source.sink_to_list()
     source.start()
 
     subscriptions = set(
