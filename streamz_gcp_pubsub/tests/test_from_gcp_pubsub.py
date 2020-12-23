@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from _pytest.outcomes import Failed
 from streamz import Stream
@@ -65,4 +67,13 @@ def test_ensure_idempotent(info):
         subscription, timeout=1, ensure_subscription=True, topic=topic
     )
     source.start()  # sub already exists, but this shouldn't fail
+    source.stop()
+
+
+def test_timeout(info):
+    topic, subscription = info
+
+    source = Stream.from_gcp_pubsub(subscription, timeout=0.5)
+    source.start()
+    time.sleep(3)
     source.stop()

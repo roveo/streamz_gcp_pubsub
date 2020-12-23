@@ -55,7 +55,7 @@ class from_gcp_pubsub(Source):
             String representation of JSON data in service account file used for
             authentication. Defaults to ``None``.
         """
-        super().__init__(ensure_io_loop=True, **kwargs)
+        super().__init__(**kwargs)
         self._subscription = subscription
         self._max_messages = max_messages
         self._timeout = timeout
