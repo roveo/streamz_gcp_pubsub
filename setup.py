@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="streamz_gcp_pubsub",
-    version="0.1.0",
+    version="0.1.1",
     packages=find_packages(),
     install_requires=[
         "streamz @ git+https://github.com/python-streamz/streamz.git",
